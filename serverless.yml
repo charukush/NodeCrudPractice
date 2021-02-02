@@ -1,0 +1,47 @@
+service: node-blog2
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+plugins:
+  - serverless-offline  
+
+
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+  createContent:
+    handler: content.createContent
+    events:
+      - http:
+          path: content
+          method: put
+
+  contentList:
+    handler: content.contentList
+    events:
+      - http:
+          path: content
+          method: get
+
+  contentDelete:
+    handler: content.contentDelete
+    events:
+      - http:
+          path: content/{id}
+          method: delete   
+
+  contentUpdate:
+    handler: content.contentUpdate
+    events:
+      - http:
+          path: content/{id}
+          method: post                     
+          
